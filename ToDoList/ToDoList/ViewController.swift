@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-class ViewController: UICollectionViewController {
+//understand the UIcollection calls here
+class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     override func viewDidLoad() {
         navigationItem.title = "To-do list"
@@ -24,6 +24,10 @@ class ViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 50)
+    }
 
 }
 
@@ -33,7 +37,7 @@ class TaskCell: UICollectionViewCell {
         super.init(frame: frame)
         setupViews()
     }
-    
+    //why would this be needed?
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -41,7 +45,10 @@ class TaskCell: UICollectionViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "testing"
+        //study this
         label.translatesAutoresizingMaskIntoConstraints = false
+        //understand UIFont
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
     

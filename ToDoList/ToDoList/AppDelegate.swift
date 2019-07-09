@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        //go over boilerplate to set up programmatic approach
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
