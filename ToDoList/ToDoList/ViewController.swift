@@ -15,6 +15,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView.alwaysBounceVertical = true
         collectionView?.register(TaskCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(TaskHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerId")
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -22,14 +23,56 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return 20
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let taskCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TaskCell
+        taskCell.nameLabel.text = "Sample Task \(indexPath.item)"
+        return taskCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 50)
     }
-
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerId", for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        collectionVie
+//        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerId", for: indexPath)
+        return CGSize(width: view.frame.width, height: 100)
+    }
 }
+
+class TaskHeader: UICollectionViewCell {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    //why would this be needed?
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Header"
+        //study this
+        label.translatesAutoresizingMaskIntoConstraints = false
+        //understand UIFont
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        return label
+    }()
+    
+    func setupViews() {
+        addSubview(nameLabel)
+        //review once done
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
+    }
+}
+
+
 
 class TaskCell: UICollectionViewCell {
     
@@ -55,7 +98,8 @@ class TaskCell: UICollectionViewCell {
     func setupViews() {
         addSubview(nameLabel)
         //review once done
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
     }
 }
 
