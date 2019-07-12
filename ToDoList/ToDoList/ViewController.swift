@@ -30,7 +30,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     //sizing of the collection view
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 60)
+        return CGSize(width: view.frame.width, height: 50)
     }
     //
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
