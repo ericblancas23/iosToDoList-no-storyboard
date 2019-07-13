@@ -43,24 +43,32 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return CGSize(width: view.frame.width, height: 100)
     }
 }
+
 //header component
 class TaskHeader: BaseCell {
     
-    let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Header"
-        //study this
-        label.translatesAutoresizingMaskIntoConstraints = false
-        //understand UIFont
-        label.font = UIFont.boldSystemFont(ofSize: 14)
-        return label
+    let taskNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter task name: "
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.borderStyle = .roundedRect
+        return textField
+    }()
+    
+    let addTaskButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Add Task", for: [])
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override func setupViews() {
-        addSubview(nameLabel)
+        addSubview(taskNameTextField)
         //review once done
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
+        addSubview(addTaskButton)
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-[v1(80)]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":taskNameTextField, "v1":addTaskButton]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":taskNameTextField]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v1]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v1":addTaskButton]))
     }
 }
 
