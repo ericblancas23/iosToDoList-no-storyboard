@@ -44,16 +44,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 }
 //header component
-class TaskHeader: UICollectionViewCell {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    //why would this be needed?
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+class TaskHeader: BaseCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -65,7 +56,7 @@ class TaskHeader: UICollectionViewCell {
         return label
     }()
     
-    func setupViews() {
+    override func setupViews() {
         addSubview(nameLabel)
         //review once done
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
@@ -74,18 +65,9 @@ class TaskHeader: UICollectionViewCell {
 }
 
 
+
 //single task cell
-class TaskCell: UICollectionViewCell {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    //why would this be needed?
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+class TaskCell: BaseCell{
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "testing"
@@ -96,7 +78,7 @@ class TaskCell: UICollectionViewCell {
         return label
     }()
     
-    func setupViews() {
+    override func setupViews() {
         addSubview(nameLabel)
         //review once done
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":nameLabel]))
@@ -104,3 +86,16 @@ class TaskCell: UICollectionViewCell {
     }
 }
 
+class BaseCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    //why would this be needed?
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+    }
+}
