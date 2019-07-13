@@ -19,13 +19,14 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
+    var tasks = ["Walk Dog", "Wash Dishes", "Take out trash"]
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return tasks.count
     }
     //ordering task cells
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let taskCell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! TaskCell
-        taskCell.nameLabel.text = "Sample Task \(indexPath.item)"
+        taskCell.nameLabel.text = tasks[indexPath.item]
         return taskCell
     }
     //sizing of the collection view
@@ -41,6 +42,9 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
 //        collectionVie
 //        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerId", for: indexPath)
         return CGSize(width: view.frame.width, height: 100)
+    }
+    func addNewTask() {
+        
     }
 }
 
@@ -66,9 +70,14 @@ class TaskHeader: BaseCell {
         addSubview(taskNameTextField)
         //review once done
         addSubview(addTaskButton)
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-[v1(80)]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":taskNameTextField, "v1":addTaskButton]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":taskNameTextField]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v1]-8-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v1":addTaskButton]))
+        addTaskButton.addTarget(self, action: "addTask", for: .touchUpInside)
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-100-[v0]-[v1(80)]-10-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":taskNameTextField, "v1":addTaskButton]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-35-[v0]-35-|", options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: ["v0":taskNameTextField]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-100-[v0]-100-|", options: NSLayoutConstraint.FormatOptions.alignAllCenterY, metrics: nil, views: ["v0":addTaskButton]))
+    }
+    
+    func addTask() {
+        
     }
 }
 
